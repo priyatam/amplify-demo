@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Storage, API, graphqlOperation } from 'aws-amplify'
 import uuid from 'uuid/v4'
 import { withAuthenticator } from 'aws-amplify-react'
-
 import { createProduct as CreateProduct } from './graphql/mutations'
 import { listProducts as ListProducts } from './graphql/queries'
 import config from './aws-exports'
@@ -37,7 +36,7 @@ function App() {
     if (file) {
       const extension = file.name.split(".")[1]
       const { type: mimeType } = file
-      const key = `images/${uuid()}${productName}.${extension}`      
+      const key = `${uuid()}-${productName}.${extension}`      
       const url = `https://${bucket}.s3.${region}.amazonaws.com/public/${key}`
       const inputData = { name: productName , image: url }
       
